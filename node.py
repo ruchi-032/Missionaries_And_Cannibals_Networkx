@@ -51,21 +51,12 @@ class Node:
 
         return children
 
-    def find_path(self):
-        path = []
-        path.append(self.state)
-        parent = self.parent
-        while parent != None:
-            path.append(parent.state)
-            parent = parent.parent
-        return path
-
 
 def bfs(i_state):
     i_node = Node(None, i_state)
 
     if i_node.is_goal_state():
-        return i_node.find_path()
+        return i_node
 
     q = Queue()
     q.put(i_node)
@@ -90,7 +81,7 @@ def bfs(i_state):
                     if child.is_goal_state():
                         G_bfs.add_node(str(child.state), color='Goal Node')
                         G_bfs.add_edge(str(child.parent.state), str(child.state))
-                        return child.find_path()
+                        return child
                     else:
                         visited.append(child.state)
                         q.put(child)
@@ -99,7 +90,7 @@ def bfs(i_state):
 def dfs(i_state):
     i_node = Node(None, i_state)
     if i_node.is_goal_state():
-        return i_node.find_path()
+        return i_node
 
     visited = []
     s = []
@@ -123,7 +114,7 @@ def dfs(i_state):
                         G_dfs.add_node(str(child.state), color='Goal Node')
                         G_dfs.add_edge(str(child.parent.state), str(child.state))  
                         # print("returned")                      
-                        return child.find_path()
+                        return child
                     
                     else:
                         # print(f"{node.state} is not a goal state")
@@ -140,6 +131,15 @@ def optimize_graph(G):
                     G.remove_edge(e[j][0], e[j][1])
     return G
 
+def find_path(solution):
+    path = []
+    path.append(solution.state)
+    parent = solution.parent
+    while parent:
+        path.append(parent.state)
+        parent = parent.parent
+    path.reverse()
+    return path
 i_state = [3,3,0]
 bfs(i_state)
 dfs(i_state)
