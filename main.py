@@ -1,16 +1,18 @@
-import time 
+import time
 from node import bfs, dfs
 
-bfs_start = time.time()
-b = bfs()
-bfs_end = time.time()
+i_state = [3,3,0]
+
+bfs_start = time.clock()
+bfs(i_state)
+bfs_end = time.clock()
 bfs_total_time = bfs_end - bfs_start
+# print(bfs_total_time)
 
-dfs_start = time.time()
-d = dfs()
-dfs_end = time.time()
+dfs_start = time.clock()
+dfs(i_state)
+dfs_end = time.clock()
 dfs_total_time = dfs_end - dfs_start
+# print(dfs_total_time)
 
-print("bfs= ", b)
-print("dfs= ", d)
-print(f"bfs:{bfs_total_time}\ndfs:{dfs_total_time}")
+print(f"Total time taken by Breadth First Search:{bfs_total_time}\nTotal Time taken by Depth First Search:{dfs_total_time}")

@@ -61,9 +61,7 @@ class Node:
         return path
 
 
-def bfs():
-    i_state = [3,3,0]
-
+def bfs(i_state):
     i_node = Node(None, i_state)
 
     if i_node.is_goal_state():
@@ -98,8 +96,7 @@ def bfs():
                         q.put(child)
     return
 
-def dfs():
-    i_state = [3,3,0]
+def dfs(i_state):
     i_node = Node(None, i_state)
     if i_node.is_goal_state():
         return i_node.find_path()
@@ -143,8 +140,9 @@ def optimize_graph(G):
                     G.remove_edge(e[j][0], e[j][1])
     return G
 
-bfs()
-dfs()
+i_state = [3,3,0]
+bfs(i_state)
+dfs(i_state)
 # print("bfs = ",b)
 # print("dfs= ", d)
 G_bfs_optimized = optimize_graph(G_bfs)
